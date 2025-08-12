@@ -1,103 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>No Sheep — When Logic Is Outlawed</title>
-  <style>
-    /* Base page styling */
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #000000; /* Deep black */
-      color: #ffffff; /* White text */
-      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    /* Logo */
-    .hero {
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px 20px;
-    }
-    .logo {
-      width: 160px;
-      height: auto;
-      filter: drop-shadow(0 0 10px rgba(255, 8, 0, 0.6));
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 8, 0, 0.5)); }
-      50%      { filter: drop-shadow(0 0 18px rgba(255, 8, 0, 0.8)); }
-    }
-
-    /* Headings with glow */
-    h1, h2 {
-      color: #FF0800; /* Rebel red */
-      font-weight: normal; /* No bold */
-      text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4);
-      animation: headingPulse 3s ease-in-out infinite;
-      margin: 20px 0;
-    }
-    @keyframes headingPulse {
-      0%, 100% { text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4); }
-      50%      { text-shadow: 0 0 10px rgba(255, 8, 0, 0.9), 0 0 18px rgba(255, 8, 0, 0.7); }
-    }
-
-    /* Tagline */
-    .tagline {
-      font-size: 1.3rem;
-      color: #ffffff;
-      max-width: 700px;
-      margin: 0 auto 40px;
-    }
-
-    /* CTA buttons */
-    .cta {
-      margin-top: 40px;
-    }
-    .btn {
-      display: inline-block;
-      background-color: #ff0000;
-      color: #ffffff;
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      border-radius: 4px;
-      text-decoration: none;
-      margin: 10px;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
-    }
-    .btn:hover {
-      background-color: #cc0000;
-      box-shadow: 0 0 16px rgba(255, 0, 0, 0.7);
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Sheep – When Logic Is Outlawed</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <header>
+    <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+  </header>
 
-  <!-- Logo -->
-  <div class="hero">
-    <img class="logo" src="images/no-sheep-logo.png" alt="No Sheep Logo">
+  <div class="container">
+    <h1>When Logic Is Outlawed</h1>
+    <h2>Rebellion Becomes Duty</h2>
+    <p class="tagline">
+      A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.
+    </p>
+
+    <!-- Netlify form: no email exposed -->
+    <section id="join" class="form">
+      <h3>Join the Rebellion</h3>
+      <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
+        <input type="hidden" name="form-name" value="join-rebellion" />
+        <p class="honeypot">
+          <label>Leave this field empty: <input name="trap" /></label>
+        </p>
+
+        <div class="row">
+          <p>
+            <label>Alias (no real names)<br/>
+              <input type="text" name="alias" maxlength="60" required />
+            </label>
+          </p>
+          <p>
+            <label>Preferred Contact (optional)<br/>
+              <select name="contact_method">
+                <option value="">Choose one (optional)</option>
+                <option>Reply by email</option>
+                <option>Signal</option>
+                <option>Matrix</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </p>
+        </div>
+
+        <p>
+          <label>Message (why you’re here)<br/>
+            <textarea name="message" required></textarea>
+          </label>
+          <small>Tip: do not include private info. We value anonymity.</small>
+        </p>
+
+        <p>
+          <label>Return address / handle (optional)<br/>
+            <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
+          </label>
+        </p>
+
+        <div class="cta">
+          <button class="btn" type="submit">Send</button>
+        </div>
+      </form>
+      <p style="text-align:center;margin-top:10px;">
+        Prefer direct mail? Use the button below (it’s obfuscated client-side).
+      </p>
+      <div class="cta">
+        <a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a>
+      </div>
+    </section>
+
+    <div class="cta" style="margin-top:30px;">
+      <a class="btn" href="manifesto.html">Read the Manifesto</a>
+    </div>
   </div>
 
-  <!-- Headline -->
-  <h1>When Logic Is Outlawed</h1>
-  <h2>Rebellion Becomes Duty</h2>
-
-  <!-- Tagline / Intro -->
-  <p class="tagline">
-    A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system
-    and refuse to be herded.
-  </p>
-
-  <!-- Call to Action -->
-  <div class="cta">
-    <a class="btn" href="manifesto.html">Read the Manifesto</a>
-    <a class="btn" href="#join">Join the Rebellion</a>
-  </div>
-
+  <!-- Obfuscated mailto fallback (assembled at runtime) -->
+  <script>
+    (function () {
+      const p1 = "c3Rvcm12ZWN0b3I5Mj";
+      const p2 = "RAdHV0YW1haWwuY2";
+      const p3 = "9t";
+      try {
+        const addr = atob(p1 + p2 + p3);
+        const a = document.getElementById("jr");
+        if (a) {
+          const subject = "Join the Rebellion";
+          const body = "Tell us why you're here. PGP available on request.";
+          a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+          a.setAttribute("aria-label", "Email No Sheep HQ securely");
+        }
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
