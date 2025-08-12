@@ -1,56 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>No Sheep</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Sheep — When Logic Is Outlawed</title>
   <style>
-    body {
-      background-color: #0d0d0d;
-      color: #ededed;
-      font-family: 'Courier New', Courier, monospace;
+    /* Base page styling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000; /* Deep black */
+      color: #ffffff; /* White text */
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      text-align: center;
     }
-    .pulse {
-      animation: pulse 2s infinite;
+
+    /* Logo */
+    .hero {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px 20px;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 8, 0, 0.6));
+      animation: pulseGlow 3s ease-in-out infinite;
     }
-    .cta-button {
-      border-color: #b30000;
-      color: #ff1a1a;
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 8, 0, 0.5)); }
+      50%      { filter: drop-shadow(0 0 18px rgba(255, 8, 0, 0.8)); }
     }
-    .cta-button:hover {
-      background-color: #b30000;
-      color: #0d0d0d;
+
+    /* Headings with glow */
+    h1, h2 {
+      color: #FF0800; /* Rebel red */
+      font-weight: normal; /* No bold */
+      text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4);
+      animation: headingPulse 3s ease-in-out infinite;
+      margin: 20px 0;
+    }
+    @keyframes headingPulse {
+      0%, 100% { text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4); }
+      50%      { text-shadow: 0 0 10px rgba(255, 8, 0, 0.9), 0 0 18px rgba(255, 8, 0, 0.7); }
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 1.3rem;
+      color: #ffffff;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    /* CTA buttons */
+    .cta {
+      margin-top: 40px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #ff0000;
+      color: #ffffff;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      margin: 10px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+    }
+    .btn:hover {
+      background-color: #cc0000;
+      box-shadow: 0 0 16px rgba(255, 0, 0, 0.7);
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-6">
-  <div class="text-center max-w-2xl">
-    <!-- Logo -->
-    <div class="w-48 h-48 mx-auto mb-6">
-      <img src="images/no-sheep-logo.png" alt="No Sheep Logo" class="w-full h-full object-contain pulse" />
-    </div>
+<body>
 
-    <!-- Tagline -->
-    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide uppercase mb-4">
-      When logic is outlawed, rebellion becomes duty.
-    </h1>
-
-    <!-- Manifesto -->
-    <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
-      You were never meant to follow. You were meant to question, to burn, to build. This society rewards obedience and punishes intelligence. No more. No Sheep is the first step toward restoring logic, structure, and accountability. We're not here to scream into the void. We're here to replace it.
-    </p>
-
-    <!-- Call to action -->
-<a href="manifesto.html" class="cta-button">Join the Rebellion</a>
-
-    <!-- Footer note -->
-    <p class="mt-10 text-gray-600 text-xs">Designed for the awake. Feared by the herd.</p>
+  <!-- Logo -->
+  <div class="hero">
+    <img class="logo" src="images/no-sheep-logo.png" alt="No Sheep Logo">
   </div>
+
+  <!-- Headline -->
+  <h1>When Logic Is Outlawed</h1>
+  <h2>Rebellion Becomes Duty</h2>
+
+  <!-- Tagline / Intro -->
+  <p class="tagline">
+    A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system
+    and refuse to be herded.
+  </p>
+
+  <!-- Call to Action -->
+  <div class="cta">
+    <a class="btn" href="manifesto.html">Read the Manifesto</a>
+    <a class="btn" href="#join">Join the Rebellion</a>
+  </div>
+
 </body>
 </html>
