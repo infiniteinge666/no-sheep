@@ -1,133 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>No Sheep — Manifesto</title>
-  <style>
-    /* Base page styling */
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #000000; /* Deep black */
-      color: #ffffff; /* White text */
-      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-    }
-
-    /* Logo */
-    .hero {
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px 20px;
-    }
-    .logo {
-      width: 120px;
-      height: auto;
-      filter: drop-shadow(0 0 10px rgba(255, 8, 0, 0.6));
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 8, 0, 0.5)); }
-      50%      { filter: drop-shadow(0 0 18px rgba(255, 8, 0, 0.8)); }
-    }
-
-    /* Headings with glow */
-    h1, h2, h3, h4, h5, h6 {
-      color: #FF0800; /* Rebel red */
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-      font-weight: normal; /* No bold */
-      text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4);
-      animation: headingPulse 3s ease-in-out infinite;
-    }
-    @keyframes headingPulse {
-      0%, 100% { text-shadow: 0 0 6px rgba(255, 8, 0, 0.6), 0 0 12px rgba(255, 8, 0, 0.4); }
-      50%      { text-shadow: 0 0 10px rgba(255, 8, 0, 0.9), 0 0 18px rgba(255, 8, 0, 0.7); }
-    }
-
-    /* Container */
-    .content {
-      max-width: 900px;
-      margin: auto;
-      padding: 0 20px 40px;
-    }
-
-    /* Paragraphs */
-    p {
-      margin-bottom: 1.2em;
-    }
-
-    /* Links */
-    a {
-      color: #ff0000; /* Rebel red links */
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* CTA button */
-    .cta {
-      text-align: center;
-      margin-top: 50px;
-    }
-    .btn {
-      display: inline-block;
-      background-color: #ff0000;
-      color: #ffffff;
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
-    }
-    .btn:hover {
-      background-color: #cc0000;
-      box-shadow: 0 0 16px rgba(255, 0, 0, 0.7);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <header>
+    <img class="logo" src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+  </header>
 
-  <!-- Logo at top -->
-  <div class="hero">
-    <img class="logo" src="images/no-sheep-logo.png" alt="No Sheep Logo">
-  </div>
-
-  <div class="content">
+  <div class="container">
     <h1>No Sheep Manifesto</h1>
     <p><em>“When logic is outlawed, rebellion becomes duty.”</em></p>
 
     <h2>We Are the Awake</h2>
-    <p>We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade. The systems meant to protect us have been hollowed out and weaponised. The people are told to trust profit from our obedience and feed on our silence. We will not be silent. We will not be led blindly to slaughter.</p>
+    <p>We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade...</p>
 
     <h2>We Refuse to Follow</h2>
-    <p>We are not sheep. We will not be herded by propaganda, by trends, by the outrage machine that demands our attention one headline at a time. We will not worship the idols they give us. We will not trade truth for comfort, or freedom for the illusion of safety. Mediocrity and tradition do not interest us. Religion and colour do not matter. Where you were born and who you were raised by will never define your place in this world.</p>
+    <p>We are not sheep. We will not be herded by propaganda...</p>
 
     <h2>We Are the Scapegoats</h2>
-    <p>We have always known. We can feel the weight of a room before a single word is spoken. We can disappear at will, watching, listening. We have been the scapegoats — blamed for the storms we warned about, punished for the truths we refused to bury. Our competence dismissed, our warnings mocked, our victories quietly ignored while mediocrity was paraded through the streets. We are not sheep. We never were. We are the scapegoats — and we will not carry their sins any longer.</p>
+    <p>We have always known. We can feel the weight of a room...</p>
 
     <h2>They Burn the Ones Who See</h2>
-    <p>For centuries, they’ve hunted the thinkers, the healers, the rebels. Once, they called them witches. Today, they call them radicals, unfit, unstable. It’s the same fire, just a different name. They teach you to fear the so-called witch — but never to question the priest holding the torch. They fear those who cannot be controlled. They destroy them not because they are dangerous to the people, but because they are dangerous to the system. We will not bow to the fire. We will not hide our voices. We will not stand by while they burn the ones who see.</p>
+    <p>For centuries, they’ve hunted the thinkers, the healers...</p>
 
     <h2>We See the Unseen</h2>
-    <p>The world has shrunk since the internet lit the dark corners. Once, chaos came from the whistle of a phone dial tone — now it comes from a single keystroke in the right hands. Information is power. But it has dulled civilisation’s senses until outrage is cheap, and empathy is rare. We scroll past injustice like it’s scenery. We’ve become so numb that one day, an ego-drunk fool could spark a nuclear fire over the sound of someone chewing.</p>
-    <p>The gifted misfits — the ones they called distracted, unfocused, bad test takers — are the only ones with the imagination to shake sense back into humanity. The talented outliers, the “you have so much potential” crowd, are the pressure points in this rotting system. And when they decide enough is enough, the world will shift.</p>
+    <p>The world has shrunk since the internet lit the dark corners...</p>
 
     <h2>We Question Everything</h2>
-    <p>We dismantle lies. We challenge authority — not for chaos, but for clarity. We believe in evidence over emotion, facts over feelings, action over apathy.</p>
+    <p>We dismantle lies. We challenge authority...</p>
 
     <h2>We Protect the Innocent</h2>
-    <p>We do not harm for pleasure or profit. We do not stand by while predators thrive in shadows. We are the shield for those who cannot yet stand.</p>
+    <p>We do not harm for pleasure or profit...</p>
 
     <h2>We Build What They Cannot Destroy</h2>
-    <p>We will not simply rage against the machine — we will replace it. We will create systems rooted in truth, accountability, and logic. Our rebellion is not mindless destruction; it is precise, intentional revolution.</p>
+    <p>We will not simply rage against the machine — we will replace it...</p>
 
-    <div class="cta">
-      <a class="btn" href="/">Back to HQ</a>
-    </div>
+    <div class="cta"><a class="btn" href="/">Back to HQ</a></div>
+    <div class="cta" style="margin-top:14px;"><a class="btn" href="/#join">Join the Rebellion</a></div>
   </div>
 </body>
 </html>
