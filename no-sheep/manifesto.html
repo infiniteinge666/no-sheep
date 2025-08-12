@@ -35,13 +35,32 @@
       margin-bottom: 1.2em;
     }
 
-    /* Optional link style */
+    /* Links */
     a {
       color: #ff0000; /* Rebel red */
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
+    }
+
+    /* CTA button */
+    .cta {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #ff0000;
+      color: #ffffff;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #cc0000;
     }
   </style>
 </head>
@@ -74,8 +93,11 @@
 
     <h2>We Build What They Cannot Destroy</h2>
     <p>We will not simply rage against the machine — we will replace it. We will create systems rooted in truth, accountability, and logic. Our rebellion is not mindless destruction; it is precise, intentional revolution.</p>
+
+    <div class="cta">
+      <a class="btn" href="/">Back to HQ</a>
+    </div>
   </div>
 </body>
 </html>
 
-</html>
