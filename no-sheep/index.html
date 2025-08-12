@@ -2,55 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>No Sheep</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #0d0d0d;
-      color: #ededed;
-      font-family: 'Courier New', Courier, monospace;
-    }
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .cta-button {
-      border-color: #b30000;
-      color: #ff1a1a;
-    }
-    .cta-button:hover {
-      background-color: #b30000;
-      color: #0d0d0d;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Sheep – When Logic Is Outlawed</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body class="flex items-center justify-center min-h-screen px-6">
-  <div class="text-center max-w-2xl">
-    <!-- Logo -->
-    <div class="w-48 h-48 mx-auto mb-6">
-      <img src="images/no-sheep-logo.png" alt="No Sheep Logo" class="w-full h-full object-contain pulse" />
-    </div>
+<body>
+  <header>
+    <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+  </header>
 
-    <!-- Tagline -->
-    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide uppercase mb-4">
-      When logic is outlawed, rebellion becomes duty.
-    </h1>
-
-    <!-- Manifesto -->
-    <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
-      You were never meant to follow. You were meant to question, to burn, to build. This society rewards obedience and punishes intelligence. No more. No Sheep is the first step toward restoring logic, structure, and accountability. We're not here to scream into the void. We're here to replace it.
+  <div class="container">
+    <h1>When Logic Is Outlawed</h1>
+    <h2>Rebellion Becomes Duty</h2>
+    <p class="tagline">
+      A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.
     </p>
 
-    <!-- Call to action -->
-<a href="manifesto.html" class="cta-button">Join the Rebellion</a>
+    <!-- Netlify form: no email exposed -->
+    <section id="join" class="form">
+      <h3>Join the Rebellion</h3>
+      <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
+        <input type="hidden" name="form-name" value="join-rebellion" />
+        <p class="honeypot">
+          <label>Leave this field empty: <input name="trap" /></label>
+        </p>
 
-    <!-- Footer note -->
-    <p class="mt-10 text-gray-600 text-xs">Designed for the awake. Feared by the herd.</p>
+        <div class="row">
+          <p>
+            <label>Alias (no real names)<br/>
+              <input type="text" name="alias" maxlength="60" required />
+            </label>
+          </p>
+          <p>
+            <label>Preferred Contact (optional)<br/>
+              <select name="contact_method">
+                <option value="">Choose one (optional)</option>
+                <option>Reply by email</option>
+                <option>Signal</option>
+                <option>Matrix</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </p>
+        </div>
+
+        <p>
+          <label>Message (why you’re here)<br/>
+            <textarea name="message" required></textarea>
+          </label>
+          <small>Tip: do not include private info. We value anonymity.</small>
+        </p>
+
+        <p>
+          <label>Return address / handle (optional)<br/>
+            <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
+          </label>
+        </p>
+
+        <div class="cta">
+          <button class="btn" type="submit">Send</button>
+        </div>
+      </form>
+      <p style="text-align:center;margin-top:10px;">
+        Prefer direct mail? Use the button below (it’s obfuscated client-side).
+      </p>
+      <div class="cta">
+        <a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a>
+      </div>
+    </section>
+
+    <div class="cta" style="margin-top:30px;">
+      <a class="btn" href="manifesto.html">Read the Manifesto</a>
+    </div>
   </div>
+
+  <!-- Obfuscated mailto fallback (assembled at runtime) -->
+  <script>
+    (function () {
+      const p1 = "c3Rvcm12ZWN0b3I5Mj";
+      const p2 = "RAdHV0YW1haWwuY2";
+      const p3 = "9t";
+      try {
+        const addr = atob(p1 + p2 + p3);
+        const a = document.getElementById("jr");
+        if (a) {
+          const subject = "Join the Rebellion";
+          const body = "Tell us why you're here. PGP available on request.";
+          a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+          a.setAttribute("aria-label", "Email No Sheep HQ securely");
+        }
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
