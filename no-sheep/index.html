@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>No Sheep – When Logic Is Outlawed</title>
   <link rel="stylesheet" href="style.css"/>
@@ -14,60 +14,68 @@
   <div class="container">
     <h1>When Logic Is Outlawed</h1>
     <h2>Rebellion Becomes Duty</h2>
-    <p class="tagline">
+    <p class="tagline copy">
       A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.
     </p>
 
-    <!-- Netlify form: no email exposed -->
-    <section id="join" class="form">
-      <h3>Join the Rebellion</h3>
-      <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
-        <input type="hidden" name="form-name" value="join-rebellion" />
-        <p class="honeypot">
-          <label>Leave this field empty: <input name="trap" /></label>
-        </p>
+    <!-- Toggle -->
+    <div class="cta">
+      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">
+        Join the Rebellion
+      </button>
+    </div>
 
-        <div class="row">
+    <!-- Collapsible panel with Netlify form -->
+    <section id="joinPanel" class="collapse">
+      <div class="form">
+        <h3>Join the Rebellion</h3>
+        <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
+          <input type="hidden" name="form-name" value="join-rebellion"/>
+          <p class="honeypot">
+            <label>Leave this field empty: <input name="trap"/></label>
+          </p>
+
+          <div class="row">
+            <p>
+              <label>Alias (no real names)<br/>
+                <input type="text" name="alias" maxlength="60" required/>
+              </label>
+            </p>
+            <p>
+              <label>Preferred Contact (optional)<br/>
+                <select name="contact_method">
+                  <option value="">Choose one (optional)</option>
+                  <option>Reply by email</option>
+                  <option>Signal</option>
+                  <option>Matrix</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </p>
+          </div>
+
           <p>
-            <label>Alias (no real names)<br/>
-              <input type="text" name="alias" maxlength="60" required />
+            <label>Message (why you’re here)<br/>
+              <textarea name="message" required></textarea>
+            </label>
+            <small>Tip: do not include private info. We value anonymity.</small>
+          </p>
+
+          <p>
+            <label>Return address / handle (optional)<br/>
+              <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
             </label>
           </p>
-          <p>
-            <label>Preferred Contact (optional)<br/>
-              <select name="contact_method">
-                <option value="">Choose one (optional)</option>
-                <option>Reply by email</option>
-                <option>Signal</option>
-                <option>Matrix</option>
-                <option>Other</option>
-              </select>
-            </label>
-          </p>
-        </div>
 
-        <p>
-          <label>Message (why you’re here)<br/>
-            <textarea name="message" required></textarea>
-          </label>
-          <small>Tip: do not include private info. We value anonymity.</small>
+          <div class="cta">
+            <button class="btn" type="submit">Send</button>
+          </div>
+        </form>
+
+        <p style="text-align:center;margin-top:10px;">
+          Prefer direct mail? Use the fallback button (address is obfuscated on the client).
         </p>
-
-        <p>
-          <label>Return address / handle (optional)<br/>
-            <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
-          </label>
-        </p>
-
-        <div class="cta">
-          <button class="btn" type="submit">Send</button>
-        </div>
-      </form>
-      <p style="text-align:center;margin-top:10px;">
-        Prefer direct mail? Use the button below (it’s obfuscated client-side).
-      </p>
-      <div class="cta">
-        <a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a>
+        <div class="cta"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
       </div>
     </section>
 
@@ -76,8 +84,19 @@
     </div>
   </div>
 
-  <!-- Obfuscated mailto fallback (assembled at runtime) -->
   <script>
+    // Toggle collapse
+    (function () {
+      const btn = document.getElementById('joinToggle');
+      const panel = document.getElementById('joinPanel');
+      function toggle() {
+        const open = panel.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggle);
+    })();
+
+    // Obfuscated mailto fallback
     (function () {
       const p1 = "c3Rvcm12ZWN0b3I5Mj";
       const p2 = "RAdHV0YW1haWwuY2";
