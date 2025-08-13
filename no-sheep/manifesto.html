@@ -13,11 +13,10 @@
 
   <div class="container manifesto">
     <h1 id="m-h1" class="fade-seed">No Sheep Manifesto</h1>
-    <!-- single animated subheading only -->
-   
+    <!-- NOTE: no H2 per request -->
 
     <!-- opening line types in, centered -->
-    <p id="m-lead" class="copy typewriter type-caret stage-seed" style="text-align:center;"></p>
+    <p id="m-lead" class="copy typewriter type-caret stage-seed"></p>
 
     <h2>We Are the Awake</h2>
     <p class="copy">We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade. The systems meant to protect us have been hollowed out and weaponised. The people are told to trust profit from our obedience and feed on our silence. We will not be silent. We will not be led blindly to slaughter.</p>
@@ -46,7 +45,6 @@
 
     <div class="btn-group"><a class="btn" href="/">Back to HQ</a></div>
 
-    <!-- Join form on manifesto too -->
     <div class="btn-group" style="margin-top:16px;">
       <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">Join the Rebellion</button>
     </div>
@@ -72,29 +70,32 @@
           <div class="btn-group"><button class="btn" type="submit">Send</button></div>
         </form>
 
-        <p style="text-align:center;margin-top:10px;">Prefer direct mail? Use the fallback button (address is obfuscated on the client).</p>
+        <p style="margin-top:10px;">Prefer direct mail? Use the fallback button (address is obfuscated on the client).</p>
         <div class="btn-group"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
       </div>
     </section>
   </div>
 
   <script>
-    // Entrance (manifesto)
+    // Entrance (manifesto) — same 3.5s black, no H2
     document.addEventListener('DOMContentLoaded', () => {
+      const hold = 3500; // ms
       const logo = document.getElementById('m-logo');
-      const h1 = document.getElementById('m-h1');
-      const h2 = document.getElementById('m-h2');
+      const h1   = document.getElementById('m-h1');
       const lead = document.getElementById('m-lead');
 
-      setTimeout(()=>{ logo.classList.add('fade-in'); }, 300);
-      setTimeout(()=>{ h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); }, 1500);
-      setTimeout(()=>{ h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); }, 3000);
+      const t = (ms, fn) => setTimeout(fn, hold + ms);
+
+      t(0,    () => logo.classList.add('fade-in'));
+      t(1200, () => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); });
 
       const leadText = "“When logic is outlawed, rebellion becomes duty.”";
-      setTimeout(()=>{ lead.classList.remove('stage-seed'); typeText(lead, leadText, 26); }, 4400);
+      const speed    = 36; // slower type for anticipation
+      t(2700, () => { lead.classList.remove('stage-seed'); typeText(lead, leadText, speed); });
     });
 
-    function typeText(el, text, speed){ el.textContent=""; let i=0;
+    function typeText(el, text, speed){
+      el.textContent=""; let i=0;
       (function tick(){ if(i<=text.length){ el.textContent=text.slice(0,i++); setTimeout(tick,speed); }
       else { el.classList.remove('type-caret'); } })();
     }
