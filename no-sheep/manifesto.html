@@ -11,9 +11,13 @@
     <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
   </header>
 
-  <div class="container">
-    <h1>No Sheep Manifesto</h1>
-    <p class="copy"><em>“When logic is outlawed, rebellion becomes duty.”</em></p>
+  <div class="container manifesto">
+    <!-- cinematic headings -->
+    <h1 id="m-h1" class="fade-seed">No Sheep Manifesto</h1>
+    <h2 id="m-h2" class="fade-seed">When Logic Is Outlawed, Rebellion Becomes Duty</h2>
+
+    <!-- first paragraph types in -->
+    <p id="m-lead" class="copy typewriter type-caret"></p>
 
     <h2>We Are the Awake</h2>
     <p class="copy">We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade. The systems meant to protect us have been hollowed out and weaponised. The people are told to trust profit from our obedience and feed on our silence. We will not be silent. We will not be led blindly to slaughter.</p>
@@ -42,88 +46,79 @@
 
     <div class="cta"><a class="btn" href="/">Back to HQ</a></div>
 
-    <!-- Toggle on manifesto too -->
+    <!-- collapse & form on manifesto too -->
     <div class="cta" style="margin-top:16px;">
-      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">
-        Join the Rebellion
-      </button>
+      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">Join the Rebellion</button>
     </div>
-
     <section id="joinPanel" class="collapse">
       <div class="form">
         <h3>Join the Rebellion</h3>
         <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
           <input type="hidden" name="form-name" value="join-rebellion"/>
-          <p class="honeypot">
-            <label>Leave this field empty: <input name="trap"/></label>
-          </p>
+          <p class="honeypot"><label>Leave this field empty: <input name="trap"/></label></p>
 
           <div class="row">
-            <p>
-              <label>Alias (no real names)<br/>
-                <input type="text" name="alias" maxlength="60" required/>
-              </label>
-            </p>
-            <p>
-              <label>Preferred Contact (optional)<br/>
-                <select name="contact_method">
-                  <option value="">Choose one (optional)</option>
-                  <option>Reply by email</option>
-                  <option>Signal</option>
-                  <option>Matrix</option>
-                  <option>Other</option>
-                </select>
-              </label>
-            </p>
+            <p><label>Alias (no real names)<br/><input type="text" name="alias" maxlength="60" required/></label></p>
+            <p><label>Preferred Contact (optional)<br/>
+              <select name="contact_method">
+                <option value="">Choose one (optional)</option>
+                <option>Reply by email</option><option>Signal</option><option>Matrix</option><option>Other</option>
+              </select></label></p>
           </div>
 
-          <p>
-            <label>Message (why you’re here)<br/>
-              <textarea name="message" required></textarea>
-            </label>
-            <small>Tip: do not include private info. We value anonymity.</small>
-          </p>
+          <p><label>Message (why you’re here)<br/><textarea name="message" required></textarea></label></p>
+          <p><label>Return address / handle (optional)<br/><input type="text" name="return_handle"/></label></p>
 
-          <p>
-            <label>Return address / handle (optional)<br/>
-              <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
-            </label>
-          </p>
-
-          <div class="cta">
-            <button class="btn" type="submit">Send</button>
-          </div>
+          <div class="cta"><button class="btn" type="submit">Send</button></div>
         </form>
 
-        <p style="text-align:center;margin-top:10px;">
-          Prefer direct mail? Use the fallback button (address is obfuscated on the client).
-        </p>
+        <p style="text-align:center;margin-top:10px;">Prefer direct mail? Use the fallback button (address is obfuscated on the client).</p>
         <div class="cta"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
       </div>
     </section>
   </div>
 
   <script>
-    // Toggle collapse (manifesto)
+    // Entrance (manifesto)
+    document.addEventListener('DOMContentLoaded', () => {
+      const h1 = document.getElementById('m-h1');
+      const h2 = document.getElementById('m-h2');
+      const lead = document.getElementById('m-lead');
+
+      setTimeout(()=>{ h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); }, 200);
+      setTimeout(()=>{ h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); }, 1600);
+
+      const leadText = "“When logic is outlawed, rebellion becomes duty.”";
+      setTimeout(()=>{ typeText(lead, leadText, 22); }, 3000);
+    });
+
+    function typeText(el, text, speed){
+      el.textContent=""; let i=0;
+      (function tick(){ if(i<=text.length){ el.textContent=text.slice(0,i++); setTimeout(tick,speed); }
+      else { el.classList.remove('type-caret'); } })();
+    }
+
+    // Collapse toggle
     (function () {
       const btn = document.getElementById('joinToggle');
       const panel = document.getElementById('joinPanel');
-      function toggle() {
+      btn.addEventListener('click', () => {
         const open = panel.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggle);
+      });
     })();
 
     // Obfuscated mailto fallback
     (function () {
-      const p1 = "c3Rvcm12ZWN0b3I5Mj";
-      const p2 = "RAdHV0YW1haWwuY2";
-      const p3 = "9t";
+      const p1="c3Rvcm12ZWN0b3I5Mj", p2="RAdHV0YW1haWwuY2", p3="9t";
       try {
-        const addr = atob(p1 + p2 + p3);
-        const a = document.getElementById("jr");
-        if (a) {
-          const subject = "Join the Rebellion";
-          const body = "Tell us why you're here. PGP available on request.";
-          a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        const addr=atob(p1+p2+p3), a=document.getElementById("jr");
+        if(a){ const subject="Join the Rebellion", body="Tell us why you're here. PGP available on request.";
+          a.href="mailto:"+addr+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+          a.setAttribute("aria-label","Email No Sheep HQ securely");
+        }
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>
