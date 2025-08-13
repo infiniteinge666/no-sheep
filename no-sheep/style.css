@@ -89,3 +89,34 @@ textarea { min-height: 140px; resize: vertical; }
 }
 .toggle[aria-expanded="true"]::after { content: "▲"; font-size: .9rem; }
 .toggle[aria-expanded="false"]::after { content: "▼"; font-size: .9rem; }
+/* ===== Landing-specific layout ===== */
+.landing h1,
+.landing h2,
+.landing .tagline { text-align: center; }
+
+.landing .cta { text-align: left; }  /* buttons left-aligned */
+
+/* ===== Animations ===== */
+.fade-seed { opacity: 0; transform: translateY(-16px); }
+.fade-down { 
+  animation: fadeDown 1.2s ease forwards;
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Typewriter */
+.typewriter {
+  display: inline-block;
+  position: relative;
+  white-space: pre-wrap;
+}
+.type-caret::after {
+  content: "▍";
+  margin-left: 4px;
+  animation: blink 1s steps(1, end) infinite;
+  opacity: .75;
+  color: #FF0800;
+}
+@keyframes blink { 50% { opacity: 0; } }
