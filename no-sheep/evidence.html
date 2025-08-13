@@ -6,19 +6,22 @@
   <title>No Sheep — Evidence</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
+    /* Page-local polish (keeps your global style.css intact) */
     .e-wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 60px; }
     .e-list { display: grid; gap: 18px; margin-top: 24px; }
     .e-item { background:#0b0b0b; border:1px solid #1f1f1f; border-radius:8px; padding:18px; }
-    .e-item h3 { margin: 0 0 8px; color:#FF0800; font-weight:normal; }
+    .e-item h3 { margin: 0 0 8px; color:#FF0800; font-weight:normal; text-align:center; }
     .e-item p { margin: 0 0 10px; text-align:center; }
     .e-item a { color:#fff; text-decoration:underline; }
     .e-item a:hover { text-shadow:0 0 8px rgba(255,8,0,.7); }
+
+    /* Ensure page has the same animation helpers in case style.css changes */
     .stage-seed { opacity:0; }
-    .fade-in { animation: fadeIn 1.7s ease forwards; }
+    .fade-in    { animation: fadeIn 1.7s ease forwards; }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    .fade-seed { opacity:0; transform: translateY(-16px); }
-    .fade-down { animation: fadeDown 1.7s ease forwards; }
-    @keyframes fadeDown { from {opacity:0; transform:translateY(-16px)} to {opacity:1; transform:translateY(0)} }
+    .fade-seed  { opacity:0; transform: translateY(-16px); }
+    .fade-down  { animation: fadeDown 1.7s ease forwards; }
+    @keyframes fadeDown { from{opacity:0; transform:translateY(-16px)} to{opacity:1; transform:translateY(0)} }
   </style>
 </head>
 <body>
@@ -32,9 +35,7 @@
       Current events and reputable reporting that expose the cracks in the system.
     </p>
 
-    <div id="eList" class="e-list">
-      <!-- Items render here -->
-    </div>
+    <div id="eList" class="e-list"></div>
 
     <div class="btn-group" style="margin-top:26px;">
       <a class="btn" href="/">Back to HQ</a>
@@ -43,32 +44,124 @@
   </div>
 
   <script>
-    // Your curated items (title, url, source, date, note). External links open in a new tab.
-    const EVIDENCE = [
+    // === Curated, grouped evidence ===
+    const GROUPS = [
       {
-        title: "Disrupt Human Trafficking",
-        url: "https://www.disrupthumantrafficking.com/?gad_source=1&gad_campaignid=12615251185&gbraid=0AAAAABevpRX1Bl34rA05F9l_wmy-w4p8B&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJR2ZmGAlGWkJKPdZcPsDLCsfH36bVfWnR4gx-CIc4fEF7zTlmLpbskaAt_cEALw_wcB",
-        source: "DHT",
-        date: "Ongoing",
-        note: "An on-the-ground look at how modern slavery hides in plain sight — and how it’s being fought right now."
+        title: "Human Trafficking & Exploitation",
+        items: [
+          {
+            title: "Disrupt Human Trafficking",
+            url: "https://www.disrupthumantrafficking.com/?gad_source=1&gad_campaignid=12615251185&gbraid=0AAAAABevpRX1Bl34rA05F9l_wmy-w4p8B&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJR2ZmGAlGWkJKPdZcPsDLCsfH36bVfWnR4gx-CIc4fEF7zTlmLpbskaAt_cEALw_wcB",
+            source: "DHT",
+            date: "Ongoing",
+            note: "On-the-ground anti-trafficking work exposing how modern slavery hides in plain sight."
+          },
+          {
+            title: "EU Human Trafficking Data — highest since 2008",
+            url: "https://home-affairs.ec.europa.eu/news/new-data-indicates-increase-victims-trafficking-human-beings-eu-2025-04-07_en",
+            source: "European Commission / Eurostat",
+            date: "2025-04-07",
+            note: "10,793 victims identified in 2023 — a 6.9% increase year-on-year."
+          },
+          {
+            title: "Cambodia Scam Centers — forced labour & torture",
+            url: "https://en.wikipedia.org/wiki/Scam_centers_in_Cambodia",
+            source: "Background explainer",
+            date: "Updated",
+            note: "Cyber-fraud compounds using trafficked labour and violent coercion."
+          },
+          {
+            title: "Dublin Airport trafficking route crackdown",
+            url: "https://www.thesun.ie/news/15665140/dublin-airport-trafficking-crime-immigration-garda/",
+            source: "Reporting",
+            date: "Recent",
+            note: "Criminal groups charging up to €20,000 per person to smuggle migrants."
+          },
+          {
+            title: "Alabama ‘bunker’ child abuse case",
+            url: "https://www.washingtonpost.com/nation/2025/07/25/alabama-bunker-child-sexual-abuse/",
+            source: "Washington Post",
+            date: "2025-07-25",
+            note: "Children rescued from a site used for exploitation and abuse."
+          },
+          {
+            title: "Ukrainian children listed in Russian online ‘catalog’ (claim)",
+            url: "https://nypost.com/2025/08/12/opinion/at-summit-trump-must-make-putin-return-ukraines-stolen-kids/",
+            source: "Opinion/claim",
+            date: "2025-08-12",
+            note: "Allegations of 294 abducted children listed online; treat as claim, investigate further."
+          }
+        ]
       },
       {
-        title: "Rising Global Religious Restrictions",
-        url: "https://religionunplugged.com/news/2024/12/17/religious-freedom-world-index-new-global-survey-shows-rising-religious-restrictions",
-        source: "Religion Unplugged",
-        date: "2024-12-17",
-        note: "A worldwide report showing freedoms of belief are being systematically squeezed across nations."
+        title: "Religious Oppression & Restrictions",
+        items: [
+          {
+            title: "Rising Global Religious Restrictions",
+            url: "https://religionunplugged.com/news/2024/12/17/religious-freedom-world-index-new-global-survey-shows-rising-religious-restrictions",
+            source: "Religion Unplugged",
+            date: "2024-12-17",
+            note: "Global index showing a broad rise in constraints on belief and practice."
+          },
+          {
+            title: "USCIRF report — religious persecution in Iran",
+            url: "https://www.uscirf.gov/news-room/releases-statements/uscirf-releases-report-religious-freedom-iran-0",
+            source: "USCIRF",
+            date: "Recent",
+            note: "Calls for designating Iran a ‘Country of Particular Concern’."
+          },
+          {
+            title: "China’s religious repression (background)",
+            url: "https://en.wikipedia.org/wiki/Antireligious_campaigns_in_China",
+            source: "Background explainer",
+            date: "Updated",
+            note: "Context on repression including claims around Falun Gong and Uyghurs."
+          },
+          {
+            title: "Religious sites destroyed in Ukraine war (background)",
+            url: "https://en.wikipedia.org/wiki/Freedom_of_religion_in_Ukraine",
+            source: "Background explainer",
+            date: "Updated",
+            note: "Hundreds of churches, mosques, synagogues, and other sites damaged or destroyed."
+          }
+        ]
       },
       {
-        title: "OCCRP — Organized Crime and Corruption Reporting Project",
-        url: "https://www.occrp.org/en/?gad_source=1&gad_campaignid=1061451834&gbraid=0AAAAADO79ReLFsx9Iji-J0EPZNaNNbGp7&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJScbT5j9E06hV0F26uq0GfPEBZWx5Ui0630injmfliFjCWjcaDvHNgaAmHnEALw_wcB",
-        source: "OCCRP",
-        date: "Ongoing",
-        note: "Leaked docs and deep investigations into corruption networks the mainstream tiptoes around."
+        title: "Corruption & Exposure Through Investigative Reporting",
+        items: [
+          {
+            title: "OCCRP — Organized Crime & Corruption Reporting Project",
+            url: "https://www.occrp.org/en/?gad_source=1&gad_campaignid=1061451834&gbraid=0AAAAADO79ReLFsx9Iji-J0EPZNaNNbGp7&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJScbT5j9E06hV0F26uq0GfPEBZWx5Ui0630injmfliFjCWjcaDvHNgaAmHnEALw_wcB",
+            source: "OCCRP",
+            date: "Ongoing",
+            note: "Leaks, datasets, and cross-border investigations exposing power and money."
+          },
+          {
+            title: "Bangladesh corruption trial of ex-PM Sheikh Hasina",
+            url: "https://www.occrp.org/en/news/bangladesh-opens-corruption-trial-for-sheikh-hasina",
+            source: "OCCRP",
+            date: "Recent",
+            note: "High-profile case over alleged land-deal corruption."
+          },
+          {
+            title: "Kohistan scandal — Rs 40B embezzlement (background)",
+            url: "https://en.wikipedia.org/wiki/Kohistan_scandal",
+            source: "Background explainer",
+            date: "Updated",
+            note: "Large-scale public funds embezzlement case in Pakistan."
+          },
+          {
+            title: "Ukraine anti-corruption reform concerns",
+            url: "https://www.occrp.org/en/news/critics-warn-of-setback-as-zelensky-signs-reform-fix",
+            source: "OCCRP",
+            date: "Recent",
+            note: "Critics warn new powers could weaken prosecutorial independence."
+          }
+        ]
       }
     ];
 
-    // Cinematic entrance (3.5s black → logo → headline → lead → items)
+    // === Cinematic entrance (3.5s black → logo → headline → lead → groups/items) ===
     document.addEventListener('DOMContentLoaded', () => {
       const hold = 3500, t = (ms, fn) => setTimeout(fn, hold + ms);
       const logo = document.getElementById('e-logo');
@@ -80,24 +173,44 @@
       t(1700, () => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); });
       t(3200, () => { lead.classList.remove('stage-seed'); lead.classList.add('fade-in'); });
 
-      // render items with stagger
-      let itemDelay = 3800;
-      EVIDENCE.forEach((it, i) => {
-        const div = document.createElement('div');
-        div.className = 'e-item stage-seed';
-        div.innerHTML = `
-          <h3>${escapeHtml(it.title)}</h3>
-          <p>${escapeHtml(it.note)}</p>
-          <p><a href="${escapeAttr(it.url)}" target="_blank" rel="noopener noreferrer">Open source</a></p>
-          <p class="e-meta">${escapeHtml(it.source)} · ${escapeHtml(it.date)}</p>
+      // Render grouped sections with stagger
+      let sectionDelay = 3800;
+      GROUPS.forEach(group => {
+        const sec = document.createElement('section');
+        sec.className = 'e-item stage-seed';
+        sec.innerHTML = `
+          <h3>${escapeHtml(group.title)}</h3>
+          <div class="e-list"></div>
         `;
-        list.appendChild(div);
-        t(itemDelay, () => div.classList.add('fade-in'));
-        itemDelay += 700; // stagger each by ~0.7s
+        list.appendChild(sec);
+        t(sectionDelay, () => sec.classList.add('fade-in'));
+        sectionDelay += 600;
+
+        // Render items inside each group with their own stagger
+        let itemDelay = sectionDelay;
+        const inner = sec.querySelector('.e-list');
+        group.items.forEach(it => {
+          const div = document.createElement('div');
+          div.className = 'e-item stage-seed';
+          div.innerHTML = `
+            <p style="margin:0 0 8px;"><strong>${escapeHtml(it.title)}</strong></p>
+            <p style="margin:0 0 8px;">${escapeHtml(it.note)}</p>
+            <p style="margin:0 0 8px;">
+              <a href="${escapeAttr(it.url)}" target="_blank" rel="noopener noreferrer">Open source</a>
+            </p>
+            <p class="e-meta" style="margin:0;color:#9ca3af;">${escapeHtml(it.source)} · ${escapeHtml(it.date)}</p>
+          `;
+          inner.appendChild(div);
+          t(itemDelay, () => div.classList.add('fade-in'));
+          itemDelay += 500; // ~0.5s between items
+        });
+
+        sectionDelay = itemDelay + 400; // move on after group renders
       });
     });
 
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])); }
+    // helpers
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])); }
     function escapeAttr(s){ return escapeHtml(s); }
   </script>
 </body>
