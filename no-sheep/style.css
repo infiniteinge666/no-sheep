@@ -76,5 +76,5 @@ textarea { min-height:140px; resize:vertical; }
 
 /* typewriter */
 .typewriter { display:inline-block; white-space:pre-wrap; text-align:center; }
-.type-caret::after { content:"▍"; margin-left:4px; animation: blink 2s steps(1,end) infinite; opacity:.75; color:#FF0800; }
+.type-caret::after { content:"▍"; margin-left:4px; animation: blink 0.5s steps(1,end) infinite; opacity:.75; color:#FF0800; }
 @keyframes blink { 20% { opacity:0; } }
