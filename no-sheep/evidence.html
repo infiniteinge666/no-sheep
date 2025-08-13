@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Sheep — Evidence</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .e-wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 60px; }
+    .e-list { display: grid; gap: 18px; margin-top: 24px; }
+    .e-item { background:#0b0b0b; border:1px solid #1f1f1f; border-radius:8px; padding:18px; }
+    .e-item h3 { margin: 0 0 8px; color:#FF0800; font-weight:normal; }
+    .e-item p { margin: 0 0 10px; text-align:center; }
+    .e-item a { color:#fff; text-decoration:underline; }
+    .e-item a:hover { text-shadow:0 0 8px rgba(255,8,0,.7); }
+    .stage-seed { opacity:0; }
+    .fade-in { animation: fadeIn 1.7s ease forwards; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .fade-seed { opacity:0; transform: translateY(-16px); }
+    .fade-down { animation: fadeDown 1.7s ease forwards; }
+    @keyframes fadeDown { from {opacity:0; transform:translateY(-16px)} to {opacity:1; transform:translateY(0)} }
+  </style>
+</head>
+<body>
+  <header>
+    <img id="e-logo" class="stage-seed" src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+  </header>
+
+  <div class="e-wrap">
+    <h1 id="e-h1" class="fade-seed">Evidence They Don’t Want You to See</h1>
+    <p id="e-lead" class="copy stage-seed">
+      Current events and reputable reporting that expose the cracks in the system.
+    </p>
+
+    <div id="eList" class="e-list">
+      <!-- Items render here -->
+    </div>
+
+    <div class="btn-group" style="margin-top:26px;">
+      <a class="btn" href="/">Back to HQ</a>
+      <a class="btn" href="manifesto.html">Manifesto</a>
+    </div>
+  </div>
+
+  <script>
+    // Your curated items (title, url, source, date, note). External links open in a new tab.
+    const EVIDENCE = [
+      {
+        title: "Disrupt Human Trafficking",
+        url: "https://www.disrupthumantrafficking.com/?gad_source=1&gad_campaignid=12615251185&gbraid=0AAAAABevpRX1Bl34rA05F9l_wmy-w4p8B&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJR2ZmGAlGWkJKPdZcPsDLCsfH36bVfWnR4gx-CIc4fEF7zTlmLpbskaAt_cEALw_wcB",
+        source: "DHT",
+        date: "Ongoing",
+        note: "An on-the-ground look at how modern slavery hides in plain sight — and how it’s being fought right now."
+      },
+      {
+        title: "Rising Global Religious Restrictions",
+        url: "https://religionunplugged.com/news/2024/12/17/religious-freedom-world-index-new-global-survey-shows-rising-religious-restrictions",
+        source: "Religion Unplugged",
+        date: "2024-12-17",
+        note: "A worldwide report showing freedoms of belief are being systematically squeezed across nations."
+      },
+      {
+        title: "OCCRP — Organized Crime and Corruption Reporting Project",
+        url: "https://www.occrp.org/en/?gad_source=1&gad_campaignid=1061451834&gbraid=0AAAAADO79ReLFsx9Iji-J0EPZNaNNbGp7&gclid=Cj0KCQjwzOvEBhDVARIsADHfJJScbT5j9E06hV0F26uq0GfPEBZWx5Ui0630injmfliFjCWjcaDvHNgaAmHnEALw_wcB",
+        source: "OCCRP",
+        date: "Ongoing",
+        note: "Leaked docs and deep investigations into corruption networks the mainstream tiptoes around."
+      }
+    ];
+
+    // Cinematic entrance (3.5s black → logo → headline → lead → items)
+    document.addEventListener('DOMContentLoaded', () => {
+      const hold = 3500, t = (ms, fn) => setTimeout(fn, hold + ms);
+      const logo = document.getElementById('e-logo');
+      const h1   = document.getElementById('e-h1');
+      const lead = document.getElementById('e-lead');
+      const list = document.getElementById('eList');
+
+      t(0,    () => logo.classList.add('fade-in'));
+      t(1700, () => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); });
+      t(3200, () => { lead.classList.remove('stage-seed'); lead.classList.add('fade-in'); });
+
+      // render items with stagger
+      let itemDelay = 3800;
+      EVIDENCE.forEach((it, i) => {
+        const div = document.createElement('div');
+        div.className = 'e-item stage-seed';
+        div.innerHTML = `
+          <h3>${escapeHtml(it.title)}</h3>
+          <p>${escapeHtml(it.note)}</p>
+          <p><a href="${escapeAttr(it.url)}" target="_blank" rel="noopener noreferrer">Open source</a></p>
+          <p class="e-meta">${escapeHtml(it.source)} · ${escapeHtml(it.date)}</p>
+        `;
+        list.appendChild(div);
+        t(itemDelay, () => div.classList.add('fade-in'));
+        itemDelay += 700; // stagger each by ~0.7s
+      });
+    });
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])); }
+    function escapeAttr(s){ return escapeHtml(s); }
+  </script>
+</body>
+</html>
