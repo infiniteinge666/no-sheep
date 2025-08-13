@@ -8,39 +8,122 @@
 </head>
 <body>
   <header>
-    <img class="logo" src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+    <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
   </header>
 
   <div class="container">
     <h1>No Sheep Manifesto</h1>
-    <p><em>“When logic is outlawed, rebellion becomes duty.”</em></p>
+    <p class="copy"><em>“When logic is outlawed, rebellion becomes duty.”</em></p>
 
     <h2>We Are the Awake</h2>
-    <p>We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade...</p>
+    <p class="copy">We were born into a world that told us stories and called them truth. From the first breath, we were handed the rules of a game we never agreed to play. We watched the cycle repeat: Obey. Consume. Pretend. Die. The system smiles, hands out crumbs, and calls it a feast. We have always seen the cracks in the façade. The systems meant to protect us have been hollowed out and weaponised. The people are told to trust profit from our obedience and feed on our silence. We will not be silent. We will not be led blindly to slaughter.</p>
 
     <h2>We Refuse to Follow</h2>
-    <p>We are not sheep. We will not be herded by propaganda...</p>
+    <p class="copy">We are not sheep. We will not be herded by propaganda, by trends, by the outrage machine that demands our attention one headline at a time. We will not worship the idols they give us. We will not trade truth for comfort, or freedom for the illusion of safety. Mediocrity and tradition do not interest us. Religion and colour do not matter. Where you were born and who you were raised by will never define your place in this world.</p>
 
     <h2>We Are the Scapegoats</h2>
-    <p>We have always known. We can feel the weight of a room...</p>
+    <p class="copy">We have always known. We can feel the weight of a room before a single word is spoken. We can disappear at will, watching, listening. We have been the scapegoats — blamed for the storms we warned about, punished for the truths we refused to bury. Our competence dismissed, our warnings mocked, our victories quietly ignored while mediocrity was paraded through the streets. We are not sheep. We never were. We are the scapegoats — and we will not carry their sins any longer.</p>
 
     <h2>They Burn the Ones Who See</h2>
-    <p>For centuries, they’ve hunted the thinkers, the healers...</p>
+    <p class="copy">For centuries, they’ve hunted the thinkers, the healers, the rebels. Once, they called them witches. Today, they call them radicals, unfit, unstable. It’s the same fire, just a different name. They teach you to fear the so-called witch — but never to question the priest holding the torch. They fear those who cannot be controlled. They destroy them not because they are dangerous to the people, but because they are dangerous to the system. We will not bow to the fire. We will not hide our voices. We will not stand by while they burn the ones who see.</p>
 
     <h2>We See the Unseen</h2>
-    <p>The world has shrunk since the internet lit the dark corners...</p>
+    <p class="copy">The world has shrunk since the internet lit the dark corners. Once, chaos came from the whistle of a phone dial tone — now it comes from a single keystroke in the right hands. Information is power. But it has dulled civilisation’s senses until outrage is cheap, and empathy is rare. We scroll past injustice like it’s scenery. We’ve become so numb that one day, an ego-drunk fool could spark a nuclear fire over the sound of someone chewing.</p>
+    <p class="copy">The gifted misfits — the ones they called distracted, unfocused, bad test takers — are the only ones with the imagination to shake sense back into humanity. The talented outliers, the “you have so much potential” crowd, are the pressure points in this rotting system. And when they decide enough is enough, the world will shift.</p>
 
     <h2>We Question Everything</h2>
-    <p>We dismantle lies. We challenge authority...</p>
+    <p class="copy">We dismantle lies. We challenge authority — not for chaos, but for clarity. We believe in evidence over emotion, facts over feelings, action over apathy.</p>
 
     <h2>We Protect the Innocent</h2>
-    <p>We do not harm for pleasure or profit...</p>
+    <p class="copy">We do not harm for pleasure or profit. We do not stand by while predators thrive in shadows. We are the shield for those who cannot yet stand.</p>
 
     <h2>We Build What They Cannot Destroy</h2>
-    <p>We will not simply rage against the machine — we will replace it...</p>
+    <p class="copy">We will not simply rage against the machine — we will replace it. We will create systems rooted in truth, accountability, and logic. Our rebellion is not mindless destruction; it is precise, intentional revolution.</p>
 
     <div class="cta"><a class="btn" href="/">Back to HQ</a></div>
-    <div class="cta" style="margin-top:14px;"><a class="btn" href="/#join">Join the Rebellion</a></div>
+
+    <!-- Toggle on manifesto too -->
+    <div class="cta" style="margin-top:16px;">
+      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">
+        Join the Rebellion
+      </button>
+    </div>
+
+    <section id="joinPanel" class="collapse">
+      <div class="form">
+        <h3>Join the Rebellion</h3>
+        <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
+          <input type="hidden" name="form-name" value="join-rebellion"/>
+          <p class="honeypot">
+            <label>Leave this field empty: <input name="trap"/></label>
+          </p>
+
+          <div class="row">
+            <p>
+              <label>Alias (no real names)<br/>
+                <input type="text" name="alias" maxlength="60" required/>
+              </label>
+            </p>
+            <p>
+              <label>Preferred Contact (optional)<br/>
+                <select name="contact_method">
+                  <option value="">Choose one (optional)</option>
+                  <option>Reply by email</option>
+                  <option>Signal</option>
+                  <option>Matrix</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </p>
+          </div>
+
+          <p>
+            <label>Message (why you’re here)<br/>
+              <textarea name="message" required></textarea>
+            </label>
+            <small>Tip: do not include private info. We value anonymity.</small>
+          </p>
+
+          <p>
+            <label>Return address / handle (optional)<br/>
+              <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
+            </label>
+          </p>
+
+          <div class="cta">
+            <button class="btn" type="submit">Send</button>
+          </div>
+        </form>
+
+        <p style="text-align:center;margin-top:10px;">
+          Prefer direct mail? Use the fallback button (address is obfuscated on the client).
+        </p>
+        <div class="cta"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
+      </div>
+    </section>
   </div>
-</body>
-</html>
+
+  <script>
+    // Toggle collapse (manifesto)
+    (function () {
+      const btn = document.getElementById('joinToggle');
+      const panel = document.getElementById('joinPanel');
+      function toggle() {
+        const open = panel.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggle);
+    })();
+
+    // Obfuscated mailto fallback
+    (function () {
+      const p1 = "c3Rvcm12ZWN0b3I5Mj";
+      const p2 = "RAdHV0YW1haWwuY2";
+      const p3 = "9t";
+      try {
+        const addr = atob(p1 + p2 + p3);
+        const a = document.getElementById("jr");
+        if (a) {
+          const subject = "Join the Rebellion";
+          const body = "Tell us why you're here. PGP available on request.";
+          a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
