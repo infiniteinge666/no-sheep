@@ -18,10 +18,9 @@
     <p id="tagline" class="copy typewriter type-caret stage-seed"></p>
 
     <div id="btnGroup" class="btn-group stage-seed">
-      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">
-        Join the Rebellion
-      </button>
+      <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">Join the Rebellion</button>
       <a class="btn" href="manifesto.html">Read the Manifesto</a>
+      <a class="btn" href="evidence.html">Evidence</a>
     </div>
 
     <!-- Collapsible Netlify form -->
@@ -57,38 +56,34 @@
   </div>
 
   <script>
-    // Cinematic entrance — black holds for 3.5s
+    // 3.5s pure black hold
     document.addEventListener('DOMContentLoaded', () => {
-      const hold   = 3500; // ms of complete black before anything shows
-      const logo   = document.getElementById('logo');
-      const h1     = document.getElementById('headline1');
-      const h2     = document.getElementById('headline2');
-      const tag    = document.getElementById('tagline');
-      const btns   = document.getElementById('btnGroup');
-
+      const hold = 3500;
       const t = (ms, fn) => setTimeout(fn, hold + ms);
 
-      // 1) Logo
-      t(0,   () => logo.classList.add('fade-in'));
-      // 2) H1
-      t(1200, () => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); });
-      // 3) H2
-      t(2600, () => { h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); });
-      // 4) Tagline (slower type for anticipation)
+      const logo = document.getElementById('logo');
+      const h1   = document.getElementById('headline1');
+      const h2   = document.getElementById('headline2');
+      const tag  = document.getElementById('tagline');
+      const btns = document.getElementById('btnGroup');
+
+      // Slower by ~0.5s each stage
+      t(0,    () => logo.classList.add('fade-in'));
+      t(1700, () => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); });
+      t(3400, () => { h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); });
+
       const text  = "A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.";
-      const speed = 34; // ms per char (slow & readable)
-      t(4100, () => {
+      const speed = 42; // was 34 — slower for anticipation
+      t(5200, () => {
         tag.classList.remove('stage-seed');
-        typeText(tag, text, speed, () => btns.classList.add('fade-in')); // 5) Buttons last
+        typeText(tag, text, speed, () => btns.classList.add('fade-in'));
       });
     });
 
-    function typeText(el, text, speed, done) {
-      el.textContent = ""; let i = 0;
-      (function tick() {
-        if (i <= text.length) { el.textContent = text.slice(0, i++); setTimeout(tick, speed); }
-        else { el.classList.remove('type-caret'); if (typeof done === 'function') done(); }
-      })();
+    function typeText(el, text, speed, done){
+      el.textContent=""; let i=0;
+      (function tick(){ if(i<=text.length){ el.textContent=text.slice(0,i++); setTimeout(tick, speed); }
+        else { el.classList.remove('type-caret'); if(typeof done==="function") done(); } })();
     }
 
     // Collapse toggle
@@ -102,7 +97,7 @@
       });
     })();
 
-    // Obfuscated mailto fallback (stormvector924@tutamail.com)
+    // Obfuscated mailto
     (function () {
       const p1="c3Rvcm12ZWN0b3I5Mj", p2="RAdHV0YW1haWwuY2", p3="9t";
       try {
