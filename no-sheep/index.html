@@ -8,22 +8,20 @@
 </head>
 <body>
   <header>
-    <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
+    <img id="logo" class="stage-seed" src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
   </header>
 
   <div class="container landing">
-    <!-- Cinematic headings -->
     <h1 id="headline1" class="fade-seed">When Logic Is Outlawed</h1>
     <h2 id="headline2" class="fade-seed">Rebellion Becomes Duty</h2>
 
-    <!-- Tagline with typewriter -->
-    <p id="tagline" class="tagline copy typewriter type-caret"></p>
+    <p id="tagline" class="tagline copy typewriter type-caret stage-seed"></p>
 
-    <!-- Toggle -->
-    <div class="cta">
+    <div id="btnGroup" class="btn-group stage-seed">
       <button id="joinToggle" class="btn toggle" aria-expanded="false" aria-controls="joinPanel">
         Join the Rebellion
       </button>
+      <a class="btn" href="manifesto.html">Read the Manifesto</a>
     </div>
 
     <!-- Collapsible Netlify form -->
@@ -49,49 +47,53 @@
           <p><label>Return address / handle (optional)<br/>
             <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/></label></p>
 
-          <div class="cta"><button class="btn" type="submit">Send</button></div>
+          <div class="btn-group"><button class="btn" type="submit">Send</button></div>
         </form>
 
-        <p style="text-align:center;margin-top:10px;">
-          Prefer direct mail? Use the fallback button (address is obfuscated on the client).
-        </p>
-        <div class="cta"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
+        <p style="text-align:center;margin-top:10px;">Prefer direct mail? Use the fallback button (address is obfuscated on the client).</p>
+        <div class="btn-group"><a id="jr" class="btn" href="#" rel="nofollow noopener">Secure Email</a></div>
       </div>
     </section>
-
-    <div class="cta" style="margin-top:30px;">
-      <a class="btn" href="manifesto.html">Read the Manifesto</a>
-    </div>
   </div>
 
-  <!-- Scripts -->
   <script>
-    // Entrance timing (landing)
+    // Cinematic entrance (landing)
     document.addEventListener('DOMContentLoaded', () => {
-      const h1 = document.getElementById('headline1');
-      const h2 = document.getElementById('headline2');
-      const taglineEl = document.getElementById('tagline');
+      const logo     = document.getElementById('logo');
+      const h1       = document.getElementById('headline1');
+      const h2       = document.getElementById('headline2');
+      const tagline  = document.getElementById('tagline');
+      const btnGroup = document.getElementById('btnGroup');
 
-      setTimeout(() => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); }, 200);
-      setTimeout(() => { h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); }, 1600);
-
-      const taglineText = "A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.";
-      setTimeout(() => { typeText(taglineEl, taglineText, 22); }, 3000);
+      // 1) Logo
+      setTimeout(() => { logo.classList.add('fade-in'); }, 300);
+      // 2) H1
+      setTimeout(() => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); }, 1500);
+      // 3) H2
+      setTimeout(() => { h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); }, 3000);
+      // 4) Tagline type
+      const text  = "A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.";
+      const speed = 22; // ms per char
+      setTimeout(() => {
+        tagline.classList.remove('stage-seed');
+        typeText(tagline, text, speed, () => {
+          // 5) Buttons last
+          btnGroup.classList.add('fade-in');
+        });
+      }, 4400);
     });
 
-    function typeText(el, text, speed) {
-      el.textContent = "";
-      let i = 0;
-      (function tick(){
-        if (i <= text.length) { el.textContent = text.slice(0, i++); setTimeout(tick, speed); }
-        else { el.classList.remove('type-caret'); }
-      })();
+    function typeText(el, text, speed, done){
+      el.textContent=""; let i=0;
+      (function tick(){ if(i<=text.length){ el.textContent=text.slice(0,i++); setTimeout(tick,speed); }
+        else { el.classList.remove('type-caret'); if(typeof done==="function") done(); } })();
     }
 
-    // Collapse toggle
+    // Collapse toggle + reveal animation is handled by CSS .collapse.open
     (function () {
       const btn = document.getElementById('joinToggle');
       const panel = document.getElementById('joinPanel');
+      if (!btn || !panel) return;
       btn.addEventListener('click', () => {
         const open = panel.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -100,15 +102,12 @@
 
     // Obfuscated mailto fallback (stormvector924@tutamail.com)
     (function () {
-      const p1 = "c3Rvcm12ZWN0b3I5Mj", p2 = "RAdHV0YW1haWwuY2", p3 = "9t";
+      const p1="c3Rvcm12ZWN0b3I5Mj", p2="RAdHV0YW1haWwuY2", p3="9t";
       try {
-        const addr = atob(p1 + p2 + p3);
-        const a = document.getElementById("jr");
-        if (a) {
-          const subject = "Join the Rebellion";
-          const body = "Tell us why you're here. PGP available on request.";
-          a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-          a.setAttribute("aria-label", "Email No Sheep HQ securely");
+        const addr=atob(p1+p2+p3), a=document.getElementById("jr");
+        if(a){ const subject="Join the Rebellion", body="Tell us why you're here. PGP available on request.";
+          a.href="mailto:"+addr+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+          a.setAttribute("aria-label","Email No Sheep HQ securely");
         }
       } catch(e){}
     })();
