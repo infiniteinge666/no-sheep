@@ -11,12 +11,13 @@
     <img src="images/no-sheep-logo.png" alt="No Sheep Logo"/>
   </header>
 
-  <div class="container">
-    <h1>When Logic Is Outlawed</h1>
-    <h2>Rebellion Becomes Duty</h2>
-    <p class="tagline copy">
-      A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.
-    </p>
+  <div class="container landing">
+    <!-- Cinematic headings -->
+    <h1 id="headline1" class="fade-seed">When Logic Is Outlawed</h1>
+    <h2 id="headline2" class="fade-seed">Rebellion Becomes Duty</h2>
+
+    <!-- Tagline with typewriter -->
+    <p id="tagline" class="tagline copy typewriter type-caret"></p>
 
     <!-- Toggle -->
     <div class="cta">
@@ -25,51 +26,30 @@
       </button>
     </div>
 
-    <!-- Collapsible panel with Netlify form -->
+    <!-- Collapsible Netlify form -->
     <section id="joinPanel" class="collapse">
       <div class="form">
         <h3>Join the Rebellion</h3>
         <form name="join-rebellion" method="POST" data-netlify="true" netlify-honeypot="trap" action="/thanks.html">
           <input type="hidden" name="form-name" value="join-rebellion"/>
-          <p class="honeypot">
-            <label>Leave this field empty: <input name="trap"/></label>
-          </p>
+          <p class="honeypot"><label>Leave this field empty: <input name="trap"/></label></p>
 
           <div class="row">
-            <p>
-              <label>Alias (no real names)<br/>
-                <input type="text" name="alias" maxlength="60" required/>
-              </label>
-            </p>
-            <p>
-              <label>Preferred Contact (optional)<br/>
-                <select name="contact_method">
-                  <option value="">Choose one (optional)</option>
-                  <option>Reply by email</option>
-                  <option>Signal</option>
-                  <option>Matrix</option>
-                  <option>Other</option>
-                </select>
-              </label>
-            </p>
+            <p><label>Alias (no real names)<br/><input type="text" name="alias" maxlength="60" required/></label></p>
+            <p><label>Preferred Contact (optional)<br/>
+              <select name="contact_method">
+                <option value="">Choose one (optional)</option>
+                <option>Reply by email</option><option>Signal</option><option>Matrix</option><option>Other</option>
+              </select></label></p>
           </div>
 
-          <p>
-            <label>Message (why you’re here)<br/>
-              <textarea name="message" required></textarea>
-            </label>
-            <small>Tip: do not include private info. We value anonymity.</small>
-          </p>
+          <p><label>Message (why you’re here)<br/><textarea name="message" required></textarea></label>
+            <small>Tip: do not include private info. We value anonymity.</small></p>
 
-          <p>
-            <label>Return address / handle (optional)<br/>
-              <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/>
-            </label>
-          </p>
+          <p><label>Return address / handle (optional)<br/>
+            <input type="text" name="return_handle" placeholder="Your burner (email, @matrix:server, Signal #, etc.)"/></label></p>
 
-          <div class="cta">
-            <button class="btn" type="submit">Send</button>
-          </div>
+          <div class="cta"><button class="btn" type="submit">Send</button></div>
         </form>
 
         <p style="text-align:center;margin-top:10px;">
@@ -84,23 +64,43 @@
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
-    // Toggle collapse
+    // Entrance timing (landing)
+    document.addEventListener('DOMContentLoaded', () => {
+      const h1 = document.getElementById('headline1');
+      const h2 = document.getElementById('headline2');
+      const taglineEl = document.getElementById('tagline');
+
+      setTimeout(() => { h1.classList.remove('fade-seed'); h1.classList.add('fade-down'); }, 200);
+      setTimeout(() => { h2.classList.remove('fade-seed'); h2.classList.add('fade-down'); }, 1600);
+
+      const taglineText = "A movement for the thinkers, the misfits, and the rational rebels who see the cracks in the system and refuse to be herded.";
+      setTimeout(() => { typeText(taglineEl, taglineText, 22); }, 3000);
+    });
+
+    function typeText(el, text, speed) {
+      el.textContent = "";
+      let i = 0;
+      (function tick(){
+        if (i <= text.length) { el.textContent = text.slice(0, i++); setTimeout(tick, speed); }
+        else { el.classList.remove('type-caret'); }
+      })();
+    }
+
+    // Collapse toggle
     (function () {
       const btn = document.getElementById('joinToggle');
       const panel = document.getElementById('joinPanel');
-      function toggle() {
+      btn.addEventListener('click', () => {
         const open = panel.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggle);
+      });
     })();
 
-    // Obfuscated mailto fallback
+    // Obfuscated mailto fallback (stormvector924@tutamail.com)
     (function () {
-      const p1 = "c3Rvcm12ZWN0b3I5Mj";
-      const p2 = "RAdHV0YW1haWwuY2";
-      const p3 = "9t";
+      const p1 = "c3Rvcm12ZWN0b3I5Mj", p2 = "RAdHV0YW1haWwuY2", p3 = "9t";
       try {
         const addr = atob(p1 + p2 + p3);
         const a = document.getElementById("jr");
@@ -110,7 +110,7 @@
           a.href = "mailto:" + addr + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
           a.setAttribute("aria-label", "Email No Sheep HQ securely");
         }
-      } catch (e) {}
+      } catch(e){}
     })();
   </script>
 </body>
